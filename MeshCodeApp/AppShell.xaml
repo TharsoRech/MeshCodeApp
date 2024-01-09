@@ -6,9 +6,9 @@
     xmlns:local="clr-namespace:MeshCodeApp"
     xmlns:views="clr-namespace:MeshCodeApp.Views">
     <ShellContent
-        Title="Inicío"
-        ContentTemplate="{DataTemplate views:HomeMeshCode}"
+        Title="Login"
+        ContentTemplate="{DataTemplate views:Login}"
         Icon="iconblank.png"
-        Route="HomeMeshCode"
-        Shell.NavBarIsVisible="true" />
+        Route="Login"
+        Shell.NavBarIsVisible="false" />
 </Shell>
