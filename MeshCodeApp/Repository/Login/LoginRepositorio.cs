@@ -1,25 +1,28 @@
-﻿using Flurl;
-using Flurl.Http;
-using MeshCodeApp.Helpers;
+﻿using MeshCodeApp.Helpers;
 using MeshCodeApp.Models.Request;
 using MeshCodeApp.Models.Response;
+using RestSharp;
+using System.Net;
 
 namespace MeshCodeApp.Repository.Login
 {
     public class LoginRepositorio : ILoginRepositorio
     {
-        public async Task<LoginResponse> LoginAsync(LoginRequest loginRequest)
+        public async Task<UserDto> LoginAsync(LoginRequest loginRequest)
         {
             try
             {
-                var response = await Urls.MeshCodeURL
-                    .AppendPathSegment("/users/login")
-                    .PutJsonAsync(loginRequest);
 
-                if (response.ResponseMessage.IsSuccessStatusCode)
+                var client = new RestClient(Urls.MeshCodeURL);
+                var request = new RestRequest("Establishment/authenticate", Method.Post);
+                request.AddJsonBody(new { cnpj  = loginRequest.Cnpj, passwordHash  = loginRequest.PasswordHash});
+
+                var response = await client.ExecuteAsync(request);
+
+               if (response.IsSuccessStatusCode)
                 {
-                    var content = await response.ResponseMessage.Content.ReadAsStringAsync();
-                    return JsonSerializer.Deserialize<LoginResponse>(content);
+                    var result = JsonSerializer.Deserialize<Result<UserDto>>(response.Content);
+                    return result?.data;
                 }
 
             }
@@ -28,7 +31,7 @@ namespace MeshCodeApp.Repository.Login
                 Console.WriteLine(ex.Message);
             }
 
-            return new LoginResponse();
+            return null;
         }
     }
 }

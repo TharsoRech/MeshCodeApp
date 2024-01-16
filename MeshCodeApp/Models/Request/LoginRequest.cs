@@ -4,11 +4,11 @@
     {
         public LoginRequest(string email, string senha)
         {
-            Email = email;
-            Senha = senha;
+            Cnpj = email;
+            PasswordHash = senha;
         }
 
-        public string Email { get; private set; }
-        public string Senha { get; private set; }
+        public string Cnpj { get; private set; }
+        public string PasswordHash { get; private set; }
     }
 }

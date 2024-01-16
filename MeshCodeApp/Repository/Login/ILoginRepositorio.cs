@@ -5,6 +5,6 @@ namespace MeshCodeApp.Repository.Login
 {
     public interface ILoginRepositorio
     {
-        Task<LoginResponse> LoginAsync(LoginRequest loginRequest);
+        Task<UserDto> LoginAsync(LoginRequest loginRequest);
     }
 }

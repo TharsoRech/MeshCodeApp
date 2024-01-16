@@ -8,7 +8,7 @@
         <Image Source="meshcode.svg" WidthRequest="160" HeightRequest="160" VerticalOptions="StartAndExpand">
         </Image>
         <Grid RowDefinitions="auto,auto,auto" Grid.Row="1" VerticalOptions="EndAndExpand" RowSpacing="16" Margin="0,16,0,0">
-            <Entry Placeholder="Email" Text="{Binding Email}"/>
+            <Entry Placeholder="Cpf/Cnpj" Text="{Binding CpfCpnj}"/>
             <Entry IsPassword="True" Placeholder="Senha" Text="{Binding Senha}" Grid.Row="1" />
             <Button Text="Entrar" Grid.Row="2"  Command="{Binding LoginCommand}"/>
         </Grid>

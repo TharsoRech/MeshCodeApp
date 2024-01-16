@@ -3,6 +3,7 @@ using MeshCodeApp.Contracts;
 using MeshCodeApp.Helpers;
 using MeshCodeApp.Models.Request;
 using MeshCodeApp.Repository.Login;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -13,7 +14,7 @@ namespace MeshCodeApp.ViewModels
 
         #region Properties
         [ObservableProperty]
-        string email;
+        string cpfCpnj;
 
         [ObservableProperty]
         string senha;
@@ -32,7 +33,7 @@ namespace MeshCodeApp.ViewModels
         [RelayCommand]
         public async Task Login()
         {
-            var loginRequest = new LoginRequest(Email, Senha);
+            var loginRequest = new LoginRequest(CpfCpnj, SessionHelper.MD5Hash(Senha));
 
             var contract = new LoginContract(loginRequest);
 
@@ -50,14 +51,15 @@ namespace MeshCodeApp.ViewModels
 
             var result = await _loginRepositorio.LoginAsync(loginRequest);
 
-            if (result is null || string.IsNullOrEmpty(result.accessToken))
+            if (result is null || string.IsNullOrEmpty(result.token))
             {
                 var toast = Toast.Make("Falha ao realizar login, tenta novamente!", CommunityToolkit.Maui.Core.ToastDuration.Long);
                 await toast.Show();
                 return;
             }
 
-            SessionHelper.SaveToken(result.accessToken, DateTime.Now.AddDays(1));
+            SessionHelper.User = result;
+            SessionHelper.SaveToken();
             await Shell.Current.GoToAsync(nameof(HomeMeshCode));
         }
     }

@@ -8,9 +8,8 @@ namespace MeshCodeApp.Contracts
         public LoginContract(LoginRequest request)
         {
             Requires()
-                .IsNotNullOrEmpty(request.Email, "Email", "E-mail não pode ser vazio")
-                .IsEmail(request.Email, "Email", "E-mail inválido")
-                .IsNotNullOrEmpty(request.Senha, "Senha", "Senha não pode ser vazia");
+                .IsNotNullOrEmpty(request.Cnpj, "Cpf/Cnpj", "Cpf/Cnpj não pode ser vazio")
+                .IsNotNullOrEmpty(request.PasswordHash, "Senha", "Senha não pode ser vazia");
         }
     }
 }
