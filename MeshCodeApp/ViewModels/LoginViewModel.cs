@@ -3,9 +3,8 @@ using MeshCodeApp.Contracts;
 using MeshCodeApp.Helpers;
 using MeshCodeApp.Models.Request;
 using MeshCodeApp.Repository.Login;
-using System.Security.Cryptography;
+using Microsoft.Extensions.DependencyInjection;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace MeshCodeApp.ViewModels
 {
@@ -25,15 +24,15 @@ namespace MeshCodeApp.ViewModels
         ILoginRepositorio _loginRepositorio;
         #endregion
 
-        public LoginViewModel(ILoginRepositorio loginRepositorio)
+        public LoginViewModel()
         {
-            _loginRepositorio = loginRepositorio;
+            _loginRepositorio = ServiceHelper.GetService<ILoginRepositorio>();
         }
 
         [RelayCommand]
         public async Task Login()
         {
-            var loginRequest = new LoginRequest(CpfCpnj, SessionHelper.MD5Hash(Senha));
+            var loginRequest = new LoginRequest(CpfCpnj.RemoveSpecialCharacters(), SessionHelper.MD5Hash(Senha));
 
             var contract = new LoginContract(loginRequest);
 
@@ -60,7 +59,8 @@ namespace MeshCodeApp.ViewModels
 
             SessionHelper.User = result;
             SessionHelper.SaveToken();
-            await Shell.Current.GoToAsync(nameof(HomeMeshCode));
+
+            Application.Current.MainPage = new HomeMeshCode(new HomeMeshCodeViewModel());   
         }
     }
 }

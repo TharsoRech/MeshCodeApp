@@ -20,11 +20,16 @@ namespace MeshCodeApp.Helpers
 
             if (expireDateTime <= DateTime.Now)
             {
-                await Shell.Current.GoToAsync(nameof(Login));
+                await RouteHelpers.LogoffAsync();
                 return string.Empty;
             }
 
             return token;
+        }
+        public static void ResetToken()
+        {
+            Preferences.Set("token", null);
+            Preferences.Set("ExpireDateTimeKey", null);
         }
 
         public static string MD5Hash(string text)
@@ -47,6 +52,19 @@ namespace MeshCodeApp.Helpers
             }
 
             return strBuilder.ToString();
+        }
+
+        public static string RemoveSpecialCharacters(this string str)
+        {
+            StringBuilder sb = new StringBuilder();
+            foreach (char c in str)
+            {
+                if ((c >= '0' && c <= '9') || (c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z'))
+                {
+                    sb.Append(c);
+                }
+            }
+            return sb.ToString();
         }
     }
 }

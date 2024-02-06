@@ -1,16 +1,56 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="MeshCodeApp.Views.Login"
-             BackgroundColor="{StaticResource MeshBlue}"
-             Title="Login">
-    <Grid RowDefinitions="auto,auto" Padding="16,64,16,16" VerticalOptions="StartAndExpand" RowSpacing="128" >
-        <Image Source="meshcode.svg" WidthRequest="160" HeightRequest="160" VerticalOptions="StartAndExpand">
-        </Image>
-        <Grid RowDefinitions="auto,auto,auto" Grid.Row="1" VerticalOptions="EndAndExpand" RowSpacing="16" Margin="0,16,0,0">
-            <Entry Placeholder="Cpf/Cnpj" Text="{Binding CpfCpnj}"/>
-            <Entry IsPassword="True" Placeholder="Senha" Text="{Binding Senha}" Grid.Row="1" />
-            <Button Text="Entrar" Grid.Row="2"  Command="{Binding LoginCommand}"/>
+<ContentPage
+    x:Class="MeshCodeApp.Views.Login"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+    Title="Login"
+    BackgroundColor="{StaticResource MeshBlue}">
+    <ContentPage.Resources>
+        <Style x:Key="InvalidEntryStyle" TargetType="Entry">
+            <Setter Property="TextColor" Value="Red" />
+        </Style>
+        <Style x:Key="ValidEntryStyle" TargetType="Entry">
+            <Setter Property="TextColor" Value="Green" />
+        </Style>
+    </ContentPage.Resources>
+    <Grid
+        Padding="16,64,16,16"
+        RowDefinitions="auto,auto"
+        RowSpacing="128"
+        VerticalOptions="StartAndExpand">
+        <Image
+            HeightRequest="160"
+            Source="meshcode.svg"
+            VerticalOptions="StartAndExpand"
+            WidthRequest="160" />
+        <Grid
+            Grid.Row="1"
+            Margin="0,16,0,0"
+            RowDefinitions="auto,auto,auto"
+            RowSpacing="16"
+            VerticalOptions="EndAndExpand">
+            <Entry Placeholder="Cpf Ou Cnpj" Text="{Binding CpfCpnj}">
+                <Entry.Behaviors>
+                    <toolkit:MaskedBehavior Mask="XX.XXX.XXX/XXXX-XX" />
+                    <toolkit:NumericValidationBehavior
+                        Flags="ValidateOnValueChanged"
+                        InvalidStyle="{StaticResource InvalidEntryStyle}"
+                        MaximumDecimalPlaces="2"
+                        MaximumValue="100.0"
+                        MinimumValue="1.0"
+                        ValidStyle="{StaticResource ValidEntryStyle}" />
+                </Entry.Behaviors>
+            </Entry>
+            <Entry
+                Grid.Row="1"
+                IsPassword="True"
+                Placeholder="Senha"
+                Text="{Binding Senha}" />
+            <Button
+                Grid.Row="2"
+                Command="{Binding LoginCommand}"
+                Text="Entrar" />
         </Grid>
     </Grid>
 </ContentPage>
