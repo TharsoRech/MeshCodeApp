@@ -3,33 +3,35 @@
     x:Class="MeshCodeApp.Views.HomeMeshCode"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
     xmlns:local="clr-namespace:MeshCodeApp.Views"
     xmlns:pages="clr-namespace:MeshCodeApp.Views.Pages"
+    xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
     xmlns:vm="clr-namespace:MeshCodeApp.ViewModels"
     Title="HomeMeshCode"
     FlyoutBackgroundColor="{StaticResource MeshBlue}"
     FlyoutBehavior="Flyout">
-             <Shell.ItemTemplate>
-                <DataTemplate>
-                    <Grid ColumnDefinitions="0.25*,0.75*" Padding="0,10">
-                <Image Source="{Binding Icon}"
-                               Margin="5"
-                               HeightRequest="45"
-                               HorizontalOptions="Center">
+    <Shell.ItemTemplate>
+        <DataTemplate>
+            <Grid Padding="0,10" ColumnDefinitions="0.25*,0.75*">
+                <Image
+                    Margin="5"
+                    HeightRequest="45"
+                    HorizontalOptions="Center"
+                    Source="{Binding Icon}">
                     <Image.Behaviors>
                         <toolkit:IconTintColorBehavior TintColor="{StaticResource White}" />
                     </Image.Behaviors>
                 </Image>
-                <Label Grid.Column="1"
-                               Text="{Binding Title}"
-                               FontSize="Small"
-                               TextColor="{StaticResource White}"
-                               FontAttributes="Bold"
-                               VerticalOptions="Center"/>
-                    </Grid>
-                </DataTemplate>
-            </Shell.ItemTemplate>
+                <Label
+                    Grid.Column="1"
+                    FontAttributes="Bold"
+                    FontSize="Small"
+                    Text="{Binding Title}"
+                    TextColor="{StaticResource White}"
+                    VerticalOptions="Center" />
+            </Grid>
+        </DataTemplate>
+    </Shell.ItemTemplate>
     <Shell.FlyoutHeader>
         <HorizontalStackLayout
             Padding="0,16,0,16"
@@ -55,24 +57,16 @@
 
         </HorizontalStackLayout>
     </Shell.FlyoutHeader>
-    <FlyoutItem
-        Title="Inicio"
-        Icon="home.svg">
-        <ShellContent ContentTemplate="{DataTemplate local:Home}" Route="Home" />
+    <FlyoutItem Title="Inicio" Icon="home.svg">
+        <ShellContent ContentTemplate="{DataTemplate pages:Home}" Route="Home" />
     </FlyoutItem>
-    <FlyoutItem
-        Title="Pontos"
-        Icon="points.svg">
-        <ShellContent ContentTemplate="{DataTemplate pages:ProfilePage}" Route="ProfilePage" />
+    <FlyoutItem Title="Pontos" Icon="points.svg">
+        <ShellContent ContentTemplate="{DataTemplate pages:PointsPage}" Route="PointsPage" />
     </FlyoutItem>
-    <FlyoutItem
-        Title="Loja"
-        Icon="store.svg">
-        <ShellContent ContentTemplate="{DataTemplate pages:ProfilePage}" Route="ProfilePage" />
+    <FlyoutItem Title="Loja" Icon="store.svg">
+        <ShellContent ContentTemplate="{DataTemplate pages:StorePage}" Route="StorePage" />
     </FlyoutItem>
-    <FlyoutItem
-        Title="Perfil"
-        Icon="profile.svg">
+    <FlyoutItem Title="Perfil" Icon="profile.svg">
         <ShellContent ContentTemplate="{DataTemplate pages:ProfilePage}" Route="ProfilePage" />
     </FlyoutItem>
     <Shell.FlyoutFooter>

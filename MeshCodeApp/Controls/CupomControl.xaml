@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView
+    x:Class="MeshCodeApp.Controls.CupomControl"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+    x:Name="cupomControl">
+    <ScrollView
+        HorizontalOptions="FillAndExpand"
+        VerticalOptions="FillAndExpand">
+        <Grid
+            Padding="4"    
+            BackgroundColor="{StaticResource MeshBlue}"
+            HorizontalOptions="FillAndExpand"
+            IsVisible="{Binding Cupom.Ativo, Source={Reference cupomControl}}"
+            RowDefinitions="*,*"
+            RowSpacing="4"
+            VerticalOptions="FillAndExpand">
+            <Grid
+                ColumnDefinitions="auto,auto"
+                ColumnSpacing="8"
+                HorizontalOptions="FillAndExpand"
+                VerticalOptions="FillAndExpand"
+                RowDefinitions="auto">
+                <Image
+                    HeightRequest="45"
+                    HorizontalOptions="Start"
+                    Source="{Binding Cupom.Image, Source={Reference cupomControl}}">
+                    <Image.Behaviors>
+                        <toolkit:IconTintColorBehavior TintColor="{StaticResource White}" />
+                    </Image.Behaviors>
+                </Image>
+                <Label
+                    Grid.Column="1"
+                    HorizontalOptions="Center"
+                    Text="{Binding Cupom.Name, Source={Reference cupomControl}}"
+                    TextColor="{StaticResource MeshYellow}"
+                    VerticalOptions="Center" />
+            </Grid>
+            <Grid
+                Grid.Row="1"
+                Margin="4,0,0,0"
+                ColumnDefinitions="auto,auto"
+                ColumnSpacing="16"
+                HorizontalOptions="FillAndExpand"
+                RowDefinitions="auto,auto,auto,auto"
+                RowSpacing="8"
+                VerticalOptions="FillAndExpand">
+                <Label
+                    HorizontalOptions="Start"
+                    Text="Valor:"
+                    TextColor="{StaticResource MeshYellow}"
+                    VerticalOptions="Center" />
+                <Label
+                    Grid.Column="1"
+                    HorizontalOptions="Start"
+                    Text="{Binding Cupom.Value, Source={Reference cupomControl}}"
+                    TextColor="{StaticResource MeshYellow}"
+                    VerticalOptions="Center" />
+                <Label
+                    Grid.Row="1"
+                    HorizontalOptions="Start"
+                    Text="Desconto:"
+                    TextColor="{StaticResource MeshYellow}"
+                    VerticalOptions="Center" />
+                <Label
+                    Grid.Row="1"
+                    Grid.Column="1"
+                    HorizontalOptions="Start"
+                    Text="{Binding Cupom.DescountPercent, Source={Reference cupomControl}}"
+                    TextColor="{StaticResource MeshYellow}"
+                    VerticalOptions="Center" />
+            </Grid>
+        </Grid>
+    </ScrollView>
+</ContentView>

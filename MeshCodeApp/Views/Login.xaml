@@ -32,7 +32,7 @@
             VerticalOptions="EndAndExpand">
             <Entry Placeholder="Cpf Ou Cnpj" Text="{Binding CpfCpnj}">
                 <Entry.Behaviors>
-                    <toolkit:MaskedBehavior Mask="XX.XXX.XXX/XXXX-XX" />
+                    <!--<toolkit:MaskedBehavior Mask="XX.XXX.XXX/XXXX-XX" />-->
                     <toolkit:NumericValidationBehavior
                         Flags="ValidateOnValueChanged"
                         InvalidStyle="{StaticResource InvalidEntryStyle}"

@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="MeshCodeApp.Views.Pages.Home"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:controls="clr-namespace:MeshCodeApp.Controls"
+    xmlns:converters="clr-namespace:MeshCodeApp.Helpers.Converters"
+    xmlns:modelsResponse="clr-namespace:MeshCodeApp.Models.Response"
+    Title="Inicio"
+    BackgroundColor="{StaticResource MeshBlue}">
+    <ContentPage.Resources>
+        <converters:IsNullConverter x:Key="isNotNull" />
+    </ContentPage.Resources>
+    <ScrollView
+      HorizontalOptions="FillAndExpand"
+      VerticalOptions="FillAndExpand">
+        <Grid RowDefinitions="auto,auto,auto" RowSpacing="16">
+            <Border
+            Padding="2,8"
+            BackgroundColor="{StaticResource MeshBlue}"
+            HorizontalOptions="FillAndExpand"
+            Stroke="{StaticResource MeshYellow}"
+            StrokeShape="RoundRectangle 0,0,12,12"
+            StrokeThickness="2"
+            VerticalOptions="FillAndExpand">
+                <Grid
+                Padding="16"
+                ColumnDefinitions="*,auto"
+                ColumnSpacing="4"
+                RowDefinitions="auto">
+                    <Label
+                    FontSize="Medium"
+                    Text="Pontos Disponiveis"
+                    TextColor="{StaticResource White}" />
+                    <Label
+                    Grid.Column="1"
+                    Grid.ColumnSpan="2"
+                    FontSize="Medium"
+                    Text="{Binding Saldo}"
+                    TextColor="{StaticResource White}" />
+                </Grid>
+            </Border>
+            <Border
+            Grid.Row="1"
+            Margin="16,8,16,8"
+            Padding="8"
+            BackgroundColor="{StaticResource MeshBlue}"
+            HorizontalOptions="FillAndExpand"
+            Stroke="{StaticResource MeshYellow}"
+            StrokeShape="RoundRectangle 12,12,12,12"
+            StrokeThickness="2">
+                <Grid
+                Padding="8"
+                RowDefinitions="auto,auto,auto,auto,auto"
+                RowSpacing="16">
+                    <Label
+                    FontSize="Medium"
+                    Text="Resgate seus pontos"
+                    TextColor="{StaticResource MeshYellow}" />
+                    <Button
+                    Grid.Row="1"
+                    Text="Capturar Código de barras"
+                    TextColor="Black" />
+                    <Label
+                    Grid.Row="2"
+                    FontSize="Medium"
+                    Text="Ou"
+                    TextColor="{StaticResource MeshYellow}" />
+                    <Grid
+                    Grid.Row="3"
+                    RowDefinitions="auto,auto"
+                    RowSpacing="8">
+                        <Entry Placeholder="Código de cupom" />
+                        <Button
+                        Grid.Row="1"
+                        Text="Resgatar"
+                        TextColor="Black" />
+                    </Grid>
+                </Grid>
+            </Border>
+            <Border
+            Grid.Row="2"
+            Margin="16,8,16,16"
+            Padding="8"
+            BackgroundColor="{StaticResource MeshBlue}"
+            HorizontalOptions="FillAndExpand"
+            IsVisible="{Binding LastCupoms, Converter={StaticResource isNotNull}}"
+            Stroke="{StaticResource MeshYellow}"
+            StrokeShape="RoundRectangle 12,12,12,12"
+            StrokeThickness="2">
+                <CollectionView ItemsSource="{Binding LastCupoms}">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate x:DataType="modelsResponse:CupomDto">
+                            <controls:CupomControl Cupom="{Binding .}" />
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </Border>
+        </Grid>
+    </ScrollView>
+</ContentPage>
