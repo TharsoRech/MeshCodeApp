@@ -3,12 +3,188 @@
     x:Class="MeshCodeApp.Views.Pages.ProfilePage"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:viewModels="clr-namespace:MeshCodeApp.ViewModels.Pages"
+    xmlns:converters="clr-namespace:MeshCodeApp.Helpers.Converters"
     Title="ProfilePage"
-    BackgroundColor="{StaticResource Gray300}">
+    x:Name="profilePage"
+    BackgroundColor="{StaticResource MeshBlue}">
+    <ContentPage.Resources>
+        <converters:IsNullConverter x:Key="isNotNull" />
+    </ContentPage.Resources>
     <VerticalStackLayout>
-        <Label
-            HorizontalOptions="Center"
-            Text="Profile Page"
-            VerticalOptions="Center" />
+        <Grid RowDefinitions="auto,auto" RowSpacing="32">
+            <Border
+                Padding="2,8"
+                BackgroundColor="{StaticResource MeshBlue}"
+                HorizontalOptions="FillAndExpand"
+                Stroke="{StaticResource MeshYellow}"
+                StrokeShape="RoundRectangle 0,0,12,12"
+                StrokeThickness="2"
+                VerticalOptions="FillAndExpand">
+                <Grid
+                    Padding="8"
+                    RowDefinitions="auto">
+                    <Label
+                        FontSize="Medium"
+                        HorizontalTextAlignment="Start"
+                        HorizontalOptions="CenterAndExpand"
+                        Text="Perfil"
+                        TextColor="{StaticResource White}" />
+                </Grid>
+            </Border>
+            <Border
+                Grid.Row="1"
+                Padding="2,8"
+                Margin="8"
+                BackgroundColor="{StaticResource MeshBlue}"
+                HorizontalOptions="FillAndExpand"
+                Stroke="{StaticResource MeshYellow}"
+                StrokeShape="RoundRectangle 12,12,12,12"
+                StrokeThickness="2"
+                VerticalOptions="FillAndExpand">
+                <Grid
+                    Padding="8"
+                    RowDefinitions="auto,auto,auto,auto,auto,auto,auto,auto,auto,auto,auto,auto,auto">
+                    <Grid ColumnDefinitions="auto,*" ColumnSpacing="8">
+                        <Label
+                        VerticalTextAlignment="Center"
+                        FontSize="Small"
+                        Text="Razão Social:"
+                        TextColor="{StaticResource White}" />
+                        <Entry
+                        Grid.Column="1"
+                        FontSize="Small"
+                        Text="{Binding UserInfo.razaoSocial}"
+                        TextColor="{StaticResource White}" />
+                    </Grid>
+                    <Grid ColumnDefinitions="auto,*" ColumnSpacing="8" Grid.Row="1">
+                        <Label
+                       VerticalTextAlignment="Center"
+                       FontSize="Small"
+                       Text="Telefone:"
+                       TextColor="{StaticResource White}" />
+                        <Entry
+                       Grid.Column="1"
+                       FontSize="Small"
+                       Text="{Binding UserInfo.phoneNumber}"
+                       TextColor="{StaticResource White}" />
+                    </Grid>
+                    <Grid ColumnDefinitions="auto,*" ColumnSpacing="8" Grid.Row="2">
+                        <Label
+                       VerticalTextAlignment="Center"
+                       FontSize="Small"
+                       Text="Cep:"
+                       TextColor="{StaticResource White}" />
+                        <Entry
+                       Grid.Column="1"
+                       FontSize="Small"
+                       Text="{Binding UserInfo.cep}"
+                       TextColor="{StaticResource White}" />
+                    </Grid>
+                    <Grid ColumnDefinitions="auto,*" ColumnSpacing="8" Grid.Row="3">
+                        <Label
+                    VerticalTextAlignment="Center"
+                    FontSize="Small"
+                    Text="Cidade:"
+                    TextColor="{StaticResource White}" />
+                        <Entry
+                    Grid.Column="1"
+                    FontSize="Small"
+                    Text="{Binding UserInfo.cidade}"
+                    TextColor="{StaticResource White}" />
+                    </Grid>
+                    <Grid ColumnDefinitions="auto,*" ColumnSpacing="8" Grid.Row="4">
+                        <Label
+                    VerticalTextAlignment="Center"
+                    FontSize="Small"
+                    Text="Endereço"
+                    TextColor="{StaticResource White}" />
+                        <Entry
+                    Grid.Column="1"
+                    FontSize="Small"
+                    Text="{Binding UserInfo.endereco}"
+                    TextColor="{StaticResource White}" />
+                    </Grid>
+                    <Grid ColumnDefinitions="auto,*" ColumnSpacing="8" Grid.Row="5">
+                        <Label
+                    VerticalTextAlignment="Center"
+                    FontSize="Small"
+                    Text="Cidade"
+                    TextColor="{StaticResource White}" />
+                        <Entry
+                    Grid.Column="1"
+                    FontSize="Small"
+                    Text="{Binding UserInfo.cidade}"
+                    TextColor="{StaticResource White}" />
+                    </Grid>
+                    <Grid ColumnDefinitions="auto,*" ColumnSpacing="8" Grid.Row="6">
+                        <Label
+                    VerticalTextAlignment="Center"
+                    FontSize="Small"
+                    Text="Uf"
+                    TextColor="{StaticResource White}" />
+                        <Entry
+                    Grid.Column="1"
+                    FontSize="Small"
+                    Text="{Binding UserInfo.uf}"
+                    TextColor="{StaticResource White}" />
+                    </Grid>
+                    <Grid ColumnDefinitions="auto,*" ColumnSpacing="8" Grid.Row="7">
+                        <Label
+                         VerticalTextAlignment="Center"
+                         FontSize="Small"
+                         Text="Endereço"
+                         TextColor="{StaticResource White}" />
+                                     <Entry
+                         Grid.Column="1"
+                         FontSize="Small"
+                         Text="{Binding UserInfo.endereco}"
+                         TextColor="{StaticResource White}" />
+                                 </Grid>
+                    <Grid ColumnDefinitions="auto,*" ColumnSpacing="8" Grid.Row="8">
+                                     <Label
+                         VerticalTextAlignment="Center"
+                         FontSize="Small"
+                         Text="Bairro"
+                         TextColor="{StaticResource White}" />
+                                     <Entry
+                         Grid.Column="1"
+                         FontSize="Small"
+                         Text="{Binding UserInfo.bairro}"
+                         TextColor="{StaticResource White}" />
+                                 </Grid>
+                    <Grid ColumnDefinitions="auto,*" ColumnSpacing="8" Grid.Row="9">
+                                     <Label
+                         VerticalTextAlignment="Center"
+                         FontSize="Small"
+                         Text="Numero"
+                         TextColor="{StaticResource White}" />
+                                     <Entry
+                         Grid.Column="1"
+                         FontSize="Small"
+                         Text="{Binding UserInfo.numero}"
+                         TextColor="{StaticResource White}" />
+                                 </Grid>
+                    <Grid ColumnDefinitions="auto,*" ColumnSpacing="8" Grid.Row="10">
+                          <Label
+                         VerticalTextAlignment="Center"
+                         FontSize="Small"
+                         Text="Complemento"
+                         TextColor="{StaticResource White}" />
+                          <Entry
+                         Grid.Column="1"
+                         FontSize="Small"
+                         Text="{Binding UserInfo.complemento}"
+                         TextColor="{StaticResource White}" />
+                    </Grid>
+                    <Grid ColumnDefinitions="*" ColumnSpacing="8" Grid.Row="11" Padding="0,16,0,0">
+                        <Button
+                    FontSize="Small"
+                    Text="Salvar"
+                    TextColor="{StaticResource White}" />
+                    </Grid>
+                </Grid>
+            </Border>
+        </Grid>
     </VerticalStackLayout>
 </ContentPage>
